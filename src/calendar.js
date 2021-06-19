@@ -33,7 +33,8 @@ class Calendar {
         `
     }
 
-    constructor({ title, start_month, start_year, end_month, end_year }) {
+    constructor({ id, title, start_month, start_year, end_month, end_year }) {
+        this.id = id;
         this.title = title;
         this.start_month = start_month;
         this.start_year = start_year;
@@ -45,11 +46,14 @@ class Calendar {
     }
 
     calendarHTML() {
+        Calendar.calendarContainer.textContent = "";
+        // convert to scope methods
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
         const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
         const days = Day.all.slice(startIndex, endIndex);
         days.forEach(day => {
-            this.element.append(day.dayHTML());
+            const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
+            this.element.append(newDayHTML);
         });
         return this.element;
     }
