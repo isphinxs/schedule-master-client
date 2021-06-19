@@ -19,14 +19,15 @@ class Calendar {
     static renderForm() {
         Calendar.calendarForm.innerHTML += `
             <form id="new-calendar-form">
-                Starting Month: <select id="starting-month">
+                Title: <input type="text" id="title">
+                Starting Month: <select id="start-month">
                     ${this.monthSelector}
                 </select>
-                Starting Year: <input type="text" id="starting-year">
-                Ending Month: <select id="ending-month">
+                Starting Year: <input type="text" id="start-year">
+                Ending Month: <select id="end-month">
                     ${this.monthSelector}
                 </select>
-                Ending Year: <input type="text" id="ending-year">
+                Ending Year: <input type="text" id="end-year">
                 <input type="submit" id="create">
             </form>
         `
