@@ -7,7 +7,9 @@ class DayService {
         fetch(`${this.endpoint}/days`)
         .then(resp => resp.json())
         .then(days => {
-            // console.log(days)
+            days.forEach(day => {
+                const d = new Day(day);
+                d.addToDom();
             })
         })
     }
