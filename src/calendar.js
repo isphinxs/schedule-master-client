@@ -33,7 +33,28 @@ class Calendar {
         `
     }
 
-    constructor() {
-    
+    constructor({ title, start_month, start_year, end_month, end_year }) {
+        this.title = title;
+        this.start_month = start_month;
+        this.start_year = start_year;
+        this.end_month = end_month;
+        this.end_year = end_year;
+
+        this.element = document.createElement("div");
+        this.element.id = `calendar-${this.id}`;
+    }
+
+    calendarHTML() {
+        const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
+        const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
+        const days = Day.all.slice(startIndex, endIndex);
+        days.forEach(day => {
+            this.element.append(day.dayHTML());
+        });
+        return this.element;
+    }
+
+    addToDom() {
+        Calendar.calendarContainer.append(this.calendarHTML());
     }
 }

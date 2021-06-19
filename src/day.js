@@ -27,7 +27,7 @@ class Day {
         return this.element;
     }
 
-    addToDom() {
-        Day.calendarContainer.append(this.dayHTML());
-    }
+    // addToDom() {
+    //     Day.calendarContainer.append(this.dayHTML());
+    // }
 }

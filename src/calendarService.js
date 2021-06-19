@@ -23,8 +23,8 @@ class CalendarService {
         fetch(`${this.endpoint}/calendars`, configObject)
         .then(resp => resp.json())
         .then(calendar => {
-            debugger;
-            // create new calendar/render days
+            const c = new Calendar(calendar);
+            c.addToDom();
         })
     }
 }

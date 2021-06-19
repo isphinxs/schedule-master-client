@@ -9,7 +9,7 @@ class DayService {
         .then(days => {
             days.forEach(day => {
                 const d = new Day(day);
-                d.addToDom();
+                // d.addToDom();
             })
         })
     }
