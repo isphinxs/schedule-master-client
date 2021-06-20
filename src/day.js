@@ -15,7 +15,6 @@ class Day {
         this.element = document.createElement("div");
         this.element.dataset.id = this.id;
         this.element.className += "calendar-day";
-        this.element.className += this.weekday;
         this.element.id = `day-${this.id}`;
 
         Day.all.push(this)

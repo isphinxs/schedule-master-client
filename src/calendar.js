@@ -15,6 +15,7 @@ class Calendar {
         <option value="11">November</option>
         <option value="12">December</option>
     `
+    static weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     
     static renderForm() {
         Calendar.calendarForm.innerHTML += `
@@ -51,6 +52,19 @@ class Calendar {
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
         const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
         const days = Day.all.slice(startIndex, endIndex);
+
+        const firstDay = days[0].weekday;
+        if (firstDay !== "Sunday") {
+            let counter = 0;
+            const endIndex = Calendar.weekdays.indexOf(firstDay);
+            while (counter < endIndex) {
+                const newBlankDay = document.createElement("div");
+                newBlankDay.innerHTML = `<div class="calendar-day"></div>`;
+                this.element.append(newBlankDay);
+                counter++;
+            }
+        }
+
         days.forEach(day => {
             const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
             this.element.append(newDayHTML);
