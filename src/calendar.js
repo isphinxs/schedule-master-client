@@ -47,7 +47,11 @@ class Calendar {
     }
 
     calendarHTML() {
+        const title = document.createElement("h3");
+        title.innerHTML = `${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
         Calendar.calendarContainer.textContent = "";
+        Calendar.calendarContainer.append(title);
+
         // convert to scope methods
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
         const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
