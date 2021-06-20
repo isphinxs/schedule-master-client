@@ -15,7 +15,7 @@ class Calendar {
         <option value="11">November</option>
         <option value="12">December</option>
     `
-    static weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    static weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     
     static renderForm() {
         Calendar.calendarForm.innerHTML += `
@@ -32,6 +32,14 @@ class Calendar {
                 <input type="submit" id="create">
             </form>
         `
+    }
+
+    static headerHTML() {
+        const header = document.createElement("div");
+        Calendar.weekdays.forEach(weekday => {
+            header.innerHTML += `<div>${weekday}</div>`;
+        })
+        return header;
     }
 
     constructor({ id, title, start_month, start_year, end_month, end_year }) {
@@ -51,6 +59,8 @@ class Calendar {
         title.innerHTML = `${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
         Calendar.calendarContainer.textContent = "";
         Calendar.calendarContainer.append(title);
+
+        Calendar.calendarContainer.append(Calendar.headerHTML());
 
         // convert to scope methods
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
