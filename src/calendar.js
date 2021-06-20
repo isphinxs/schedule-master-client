@@ -36,12 +36,13 @@ class Calendar {
 
     static headerHTML() {
         const header = document.createElement("div");
+        header.classList.add("calendar-header");
         Calendar.weekdays.forEach(weekday => {
             header.innerHTML += `<div>${weekday}</div>`;
         })
         return header;
     }
-
+    
     constructor({ id, title, start_month, start_year, end_month, end_year }) {
         this.id = id;
         this.title = title;
@@ -49,24 +50,23 @@ class Calendar {
         this.start_year = start_year;
         this.end_month = end_month;
         this.end_year = end_year;
-
+        
         this.element = document.createElement("div");
         this.element.id = `calendar-${this.id}`;
     }
-
-    calendarHTML() {
+    
+    titleHTML() {
         const title = document.createElement("h3");
         title.innerHTML = `${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
-        Calendar.calendarContainer.textContent = "";
-        Calendar.calendarContainer.append(title);
-
-        Calendar.calendarContainer.append(Calendar.headerHTML());
-
+        return title;
+    }
+    
+    calendarHTML() {
         // convert to scope methods
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
         const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
         const days = Day.all.slice(startIndex, endIndex);
-
+        
         const firstDay = days[0].weekday;
         if (firstDay !== "Sunday") {
             let counter = 0;
@@ -78,15 +78,18 @@ class Calendar {
                 counter++;
             }
         }
-
+        
         days.forEach(day => {
             const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
             this.element.append(newDayHTML);
         });
         return this.element;
     }
-
+    
     addToDom() {
+        Calendar.calendarContainer.textContent = "";
+        Calendar.calendarContainer.append(this.titleHTML());
+        Calendar.calendarContainer.append(Calendar.headerHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
     }
 }
