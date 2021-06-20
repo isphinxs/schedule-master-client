@@ -52,7 +52,9 @@ class Calendar {
         this.end_year = end_year;
         
         this.element = document.createElement("div");
+        this.element.dataset.id = this.id;
         this.element.id = `calendar-${this.id}`;
+        this.element.addEventListener("click", this.handleClick);
     }
     
     titleHTML() {
@@ -83,6 +85,11 @@ class Calendar {
             const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
             this.element.append(newDayHTML);
         });
+
+        this.element.innerHTML += `
+            <button id="calendar-delete-button">Start Over</button>
+        `
+
         return this.element;
     }
     
@@ -91,5 +98,13 @@ class Calendar {
         Calendar.calendarContainer.append(this.titleHTML());
         Calendar.calendarContainer.append(Calendar.headerHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
+    }
+
+    handleClick(event) {
+        if (event.target.innerText === "Start Over") {
+            // debugger;
+            calendarService.deleteCalendar(this.dataset.id);
+            this.parentElement.innerHTML = "";
+        }
     }
 }

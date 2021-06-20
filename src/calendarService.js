@@ -27,4 +27,15 @@ class CalendarService {
             c.addToDom();
         })
     }
+
+    deleteCalendar(id) {
+        fetch(`${this.endpoint}/calendars/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(json => alert(json.message))
+    }
 }
