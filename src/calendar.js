@@ -59,7 +59,7 @@ class Calendar {
     
     titleHTML() {
         const title = document.createElement("h3");
-        title.innerHTML = `${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
+        title.innerHTML = `${this.title}: ${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
         return title;
     }
     
