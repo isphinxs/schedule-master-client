@@ -105,6 +105,10 @@ class Calendar {
             // debugger;
             calendarService.deleteCalendar(this.dataset.id);
             this.parentElement.innerHTML = "";
+            return;
+        }
+        if (event.target.innerText === "+") {
+            Note.renderForm();
         }
     }
 }
