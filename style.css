@@ -10,3 +10,7 @@ div.calendar-day {
     border: 1px solid gray;
     text-align: center;
 }
+
+#note-popup {
+    display: block;
+}
