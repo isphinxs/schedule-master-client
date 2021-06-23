@@ -105,8 +105,8 @@ class Calendar {
         if (event.target.innerText === "Start Over") {
             // debugger;
             calendarService.deleteCalendar(this.dataset.id);
-            this.parentElement.innerHTML = "";
-            return;
+            // this.parentElement.innerHTML = "";
+            // return;
         }
         if (event.target.innerText === "+") {
             Note.renderForm();

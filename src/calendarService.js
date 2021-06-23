@@ -25,6 +25,7 @@ class CalendarService {
         .then(calendar => {
             const c = new Calendar(calendar);
             c.addToDom();
+            Calendar.calendarForm.style.visibility = "hidden";
         })
     }
 
@@ -36,6 +37,10 @@ class CalendarService {
             }
         })
         .then(resp => resp.json())
-        .then(json => alert(json.message))
+        .then(json => {
+            Calendar.calendarForm.style.visibility = "visible";
+            Calendar.calendarContainer.innerHTML = "";
+            alert(json.message);
+        })
     }
 }
