@@ -23,6 +23,7 @@ class Note {
     }
 
     constructor({id, content, is_active, calendar_id, day_id}) {
+        this.id = id;
         this.content = content;
         this.is_active = is_active;
         this.calendar_id = calendar_id;
@@ -31,14 +32,15 @@ class Note {
         this.element = document.createElement("li");
         this.element.dataset.id = id;
         this.element.id = `note-${this.id}`;
-        
+        // debugger;
         Note.all.push(this);
     }
     
     static handleSubmit(event) {
         event.preventDefault(); 
         if (event.submitter.id === "update-button") {
-            console.log("Update button pressed!");
+            // console.log("Update button pressed!");
+            NoteService
             return;
         }
         if (event.submitter.id === "cancel-button") {
@@ -46,4 +48,5 @@ class Note {
             return;
         }
     }
+
 }

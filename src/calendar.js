@@ -84,6 +84,7 @@ class Calendar {
         days.forEach(day => {
             const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
             this.element.append(newDayHTML);
+            noteService.createNote(day, this);
         });
 
         this.element.innerHTML += `

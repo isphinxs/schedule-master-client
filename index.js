@@ -1,6 +1,7 @@
 const baseUrl = "http://127.0.0.1:3000";
 const calendarService = new CalendarService(baseUrl);
 const dayService = new DayService(baseUrl);
+const noteService = new NoteService(baseUrl);
 
 dayService.getDays();
 
