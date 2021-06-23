@@ -1,10 +1,9 @@
 class Note {
     static all = [];
-    static notePopup = document.getElementById("note-popup");
+    static noteContainer = document.getElementById("note-container");
 
     static renderForm() {
-        // debugger;
-        Calendar.calendarContainer.innerHTML += `
+        this.noteContainer.innerHTML += `
             <form id="note-popup">
                 <h3>Add a Note</h3>
                 <br>
@@ -21,8 +20,6 @@ class Note {
                 <button id="cancel-button">Cancel</button>
             </form>
         `
-        // this.notePopup.addEventListener("submit", this.handleSubmit);
-        // this.notePopup.addEventListener("click", this.handleClick);
     }
 
     constructor({id, content, is_active, calendar_id, day_id}) {
@@ -38,20 +35,15 @@ class Note {
         Note.all.push(this);
     }
     
-    // static handleSubmit(event) {
-    //     debugger;
-    //     event.preventDefault(); 
-    //     console.log("Update button pressed!");
-    // }
-
-    // static handleClick(event) {
-    //     debugger;
-    //     if (event.target.innerText === "Update") {
-    //         console.log("update button pressed");
-    //     }
-    //     if (event.target.innerText === "Cancel") {
-    //         console.log("cancel button pressed");
-    //         Note.notePopup.remove();
-    //     }
-    // }
+    static handleSubmit(event) {
+        event.preventDefault(); 
+        if (event.submitter.id === "update-button") {
+            console.log("Update button pressed!");
+            return;
+        }
+        if (event.submitter.id === "cancel-button") {
+            event.target.remove();
+            return;
+        }
+    }
 }

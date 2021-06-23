@@ -5,10 +5,16 @@ const dayService = new DayService(baseUrl);
 dayService.getDays();
 
 Calendar.renderForm();
-Calendar.calendarForm.addEventListener("submit", handleSubmit);
+Calendar.calendarForm.addEventListener("submit", handleCalendarSubmit);
+Note.noteContainer.addEventListener("submit", handleNoteSubmit);
 
-function handleSubmit(event) {
+function handleCalendarSubmit(event) {
     event.preventDefault();
     calendarService.createCalendar();
     event.target.reset();
+}
+
+function handleNoteSubmit(event) {
+    event.preventDefault();
+    Note.handleSubmit(event);
 }
