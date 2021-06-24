@@ -58,10 +58,10 @@ class NoteService {
         .then(resp => resp.json())
         .then(note => {
             // debugger;
-            // CHECK: content is not updating correctly
             const n = Note.all.find(n => n.id === note.id);
+            n.updateNote(note);
             n.addToDom();
-            // remove note form
+            Note.noteContainer.innerHTML = "";
         })
         
     }

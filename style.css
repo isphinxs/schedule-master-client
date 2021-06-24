@@ -18,7 +18,3 @@ div.calendar-day {
 .active {
     background-color: lightblue;
 }
-
-.inactive {
-    background-color: transparent;
-}

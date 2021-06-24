@@ -57,18 +57,31 @@ class Note {
     }
 
     addToDom() {
-        // debugger;
         const day = document.getElementById(`day-${this.day_id}`);
         const ul = document.getElementById(`note-${this.id}`).getElementsByTagName("ul")[0];
-        if (this.active) {
-            day.classList.add("active");
+        
+        // debugger;
+        
+        if (this.is_active) {
+            if (!day.classList.contains("active")) {
+                day.classList.add("active");
+            }
         } else {
-            day.classList.add("inactive");
+            if (day.classList.contains("active")) {
+                day.classList.remove("active");
+            }
         }
-        if (content) {
-            document.createElement("li");
-            li.innerHTML += content;
+        if (this.content) {
+            const li = document.createElement("li");
+            li.innerHTML += this.content;
             ul.append(li);
         }
+    }
+
+    updateNote(newNote) {
+        // debugger;
+        this.is_active = newNote.is_active;
+        this.content = newNote.content;
+        return this;
     }
 }
