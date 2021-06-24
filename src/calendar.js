@@ -103,13 +103,13 @@ class Calendar {
 
     handleClick(event) {
         if (event.target.innerText === "Start Over") {
-            // debugger;
             calendarService.deleteCalendar(this.dataset.id);
-            // this.parentElement.innerHTML = "";
-            // return;
+            return;
         }
         if (event.target.innerText === "+") {
-            Note.renderForm();
+            const note_id = event.target.dataset.id;
+            Note.renderForm(note_id);
+            return;
         }
     }
 }

@@ -2,9 +2,9 @@ class Note {
     static all = [];
     static noteContainer = document.getElementById("note-container");
 
-    static renderForm() {
+    static renderForm(note_id) {
         this.noteContainer.innerHTML += `
-            <form id="note-popup">
+            <form data-id="${note_id}" id="note-popup">
                 <h3>Add a Note</h3>
                 <br>
                 <label>Active?</label> 
@@ -29,18 +29,22 @@ class Note {
         this.calendar_id = calendar_id;
         this.day_id = day_id;
 
-        this.element = document.createElement("li");
+        this.element = document.createElement("button");
         this.element.dataset.id = id;
-        this.element.id = `note-${this.id}`;
-        // debugger;
+        this.element.id = `note-button-${this.id}`;
+        this.element.innerHTML = "+";
+
+        const day = document.getElementById(`day-${this.day_id}`);
+        day.append(this.element);
+
         Note.all.push(this);
     }
     
     static handleSubmit(event) {
         event.preventDefault(); 
         if (event.submitter.id === "update-button") {
-            // console.log("Update button pressed!");
-            NoteService
+            const note_id = event.target.dataset.id;
+            noteService.updateNote(note_id);
             return;
         }
         if (event.submitter.id === "cancel-button") {
