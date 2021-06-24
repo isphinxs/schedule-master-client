@@ -15,10 +15,10 @@ div.calendar-day {
     display: block;
 }
 
-#active {
+.active {
     background-color: lightblue;
 }
 
-#inactive {
+.inactive {
     background-color: transparent;
 }

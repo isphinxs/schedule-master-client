@@ -57,12 +57,13 @@ class Note {
     }
 
     addToDom() {
-        debugger;
+        // debugger;
+        const day = document.getElementById(`day-${this.day_id}`);
         const ul = document.getElementById(`note-${this.id}`).getElementsByTagName("ul")[0];
         if (this.active) {
-            // add active class to day
+            day.classList.add("active");
         } else {
-            // add inactive class to day
+            day.classList.add("inactive");
         }
         if (content) {
             document.createElement("li");
