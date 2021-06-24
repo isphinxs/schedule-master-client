@@ -38,8 +38,8 @@ class NoteService {
 
         const note = {
             id: note_id,
-            content: document.getElementById("content"),
-            is_active: is_active,
+            content: document.getElementById("content").value,
+            is_active: is_active(),
             // calendar_id: calendar_id,
             // day_id: day_id
         }
@@ -52,7 +52,7 @@ class NoteService {
             body: JSON.stringify(note)
         }
     
-        debugger; 
+        // debugger; 
 
         fetch(`${this.endpoint}/notes/${note.id}`, configObject)
         .then(resp => resp.json())
