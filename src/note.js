@@ -29,10 +29,13 @@ class Note {
         this.calendar_id = calendar_id;
         this.day_id = day_id;
 
-        this.element = document.createElement("button");
-        this.element.dataset.id = id;
-        this.element.id = `note-button-${this.id}`;
-        this.element.innerHTML = "+";
+        this.element = document.createElement("div");
+        this.element.innerHTML = `
+            <div id="note-${id}">
+                <ul></ul>
+                <button data-id="${id}" id="note-button-${id}">+</button>
+            </div>
+        `;
 
         const day = document.getElementById(`day-${this.day_id}`);
         day.append(this.element);
@@ -53,4 +56,18 @@ class Note {
         }
     }
 
+    addToDom() {
+        debugger;
+        const ul = document.getElementById(`note-${this.id}`).getElementsByTagName("ul")[0];
+        if (this.active) {
+            // add active class to day
+        } else {
+            // add inactive class to day
+        }
+        if (content) {
+            document.createElement("li");
+            li.innerHTML += content;
+            ul.append(li);
+        }
+    }
 }

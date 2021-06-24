@@ -14,3 +14,11 @@ div.calendar-day {
 #note-popup {
     display: block;
 }
+
+#active {
+    background-color: lightblue;
+}
+
+#inactive {
+    background-color: transparent;
+}

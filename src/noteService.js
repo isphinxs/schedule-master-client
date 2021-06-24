@@ -57,8 +57,11 @@ class NoteService {
         fetch(`${this.endpoint}/notes/${note.id}`, configObject)
         .then(resp => resp.json())
         .then(note => {
-            debugger;
-            // const n = new Note(note);
+            // debugger;
+            // CHECK: content is not updating correctly
+            const n = Note.all.find(n => n.id === note.id);
+            n.addToDom();
+            // remove note form
         })
         
     }
