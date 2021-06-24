@@ -18,3 +18,7 @@ div.calendar-day {
 .active {
     background-color: lightblue;
 }
+
+ul {
+    list-style-type: none;
+}
