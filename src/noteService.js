@@ -29,10 +29,10 @@ class NoteService {
     updateNote(note_id) {
         const is_active = () => {
             const radio_values = document.getElementsByName("active-button");
-            for (let i = 0; i < 2; i++) {
-                if (radio_values[i].checked) {
-                    return radio_values[i] ? true : false;
-                }
+            if (radio_values[0].checked) {
+                return true;
+            } else {
+                return false;
             }
         }
 
