@@ -1,4 +1,5 @@
 class Calendar {
+    static all = [];
     static calendarContainer = document.getElementById("calendar-container");
     static calendarForm = document.getElementById("calendar-form-container");
     static monthSelector = `
@@ -55,6 +56,8 @@ class Calendar {
         this.element.dataset.id = this.id;
         this.element.id = `calendar-${this.id}`;
         this.element.addEventListener("click", this.handleClick);
+
+        Calendar.all.push(this);
     }
     
     titleHTML() {
@@ -89,6 +92,7 @@ class Calendar {
 
         this.element.innerHTML += `
             <button id="calendar-delete-button">Start Over</button>
+            <button id="calendar-edit-button">Edit</button>
         `
 
         return this.element;
@@ -102,8 +106,15 @@ class Calendar {
     }
 
     handleClick(event) {
+        // debugger;
         if (event.target.innerText === "Start Over") {
             calendarService.deleteCalendar(this.dataset.id);
+            return;
+        }
+        if (event.target.innerText === "Edit") {
+            Calendar.calendarForm.style.visibility = "visible";
+            const button = document.getElementById("create");
+            button.value = "Submit Changes";
             return;
         }
         if (event.target.innerText === "+") {

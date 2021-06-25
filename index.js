@@ -10,8 +10,14 @@ Calendar.calendarForm.addEventListener("submit", handleCalendarSubmit);
 Note.noteContainer.addEventListener("submit", handleNoteSubmit);
 
 function handleCalendarSubmit(event) {
+    // debugger;
     event.preventDefault();
-    calendarService.createCalendar();
+    if (event.submitter.value !== "Submit Changes") {
+        calendarService.createCalendar();
+    } else {
+        const calendar_id = Calendar.calendarContainer.childNodes[2].dataset.id;
+        calendarService.updateCalendar(calendar_id);
+    }
     event.target.reset();
 }
 
