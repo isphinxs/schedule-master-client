@@ -40,6 +40,7 @@ class CalendarService {
         .then(json => {
             Calendar.calendarForm.style.visibility = "visible";
             Calendar.calendarContainer.innerHTML = "";
+            Note.noteContainer.innerHTML = "";
             alert(json.message);
         })
     }
