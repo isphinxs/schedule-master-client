@@ -1,13 +1,20 @@
-div#calendar-container > div, #calendar-header {
+div#calendar-container > div {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: (1, 20px);
+    grid-auto-rows: repeat(5, 1fr);
     gap: 10px;
     height: 100%;
 }
 
+div.calendar-day.header {
+    color: white;
+    border: none;
+    margin-top: 20px;
+}
+
 div.calendar-day {
-    border: 1px solid gray;
+    border: 1px solid #6FFFE9;
     text-align: center;
 }
 
@@ -16,9 +23,57 @@ div.calendar-day {
 }
 
 .active {
-    background-color: lightblue;
+    background-color: #26d7ff;
+    color: #0B132B;
 }
+
 
 ul {
     list-style-type: none;
+    display: table;
+}
+
+/*  Fonts  */
+
+h1, h2, h3 {
+    font-family: 'Raleway', sans-serif;
+    color: #84fffa;
+}
+
+body {
+    font-family: 'Slabo 27px', serif;
+    background-color: #0073ff;;
+    color: #0B132B;
+    text-align: center;
+}
+
+input, select {
+    font-family: 'Slabo 27px', serif;
+    background-color: white;
+    color: #0B132B;
+    margin: 5px;
+    font-size: 15px;
+}
+
+button:not(.note-button), input[type=submit] {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    color: white;
+    background-color: #1C2541;
+    min-width: 200px;
+    padding: 0.5em;
+    border: none;
+    margin: 1em;
+}
+
+button:hover, input[type=submit]:hover {
+    background-color: #5BC0BE;
+}
+
+.note-button {
+    height: 20px;
+    width: 20px;
+    background-color: #4cacff;
+    color: white;
+    border: none;
 }

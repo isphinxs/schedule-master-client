@@ -27,6 +27,7 @@ class Calendar {
                         ${this.monthSelector}
                     </select>
                     Starting Year: <input type="text" id="start-year">
+                    <br>
                     Ending Month: <select id="end-month">
                         ${this.monthSelector}
                     </select>
@@ -37,15 +38,6 @@ class Calendar {
         `
     }
 
-    static headerHTML() {
-        const header = document.createElement("div");
-        header.classList.add("calendar-header");
-        Calendar.weekdays.forEach(weekday => {
-            header.innerHTML += `<div>${weekday}</div>`;
-        })
-        return header;
-    }
-    
     constructor({ id, title, start_month, start_year, end_month, end_year }) {
         this.id = id;
         this.title = title;
@@ -58,7 +50,7 @@ class Calendar {
         this.element.dataset.id = this.id;
         this.element.id = `calendar-${this.id}`;
         this.element.addEventListener("click", this.handleClick);
-
+        
         Calendar.all.push(this);
     }
     
@@ -70,6 +62,10 @@ class Calendar {
     }
     
     calendarHTML() {
+        Calendar.weekdays.forEach(weekday => {
+            this.element.innerHTML += `<div class="calendar-day header">${weekday}</div>`;
+        })
+        
         // convert to scope methods
         const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
         const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
@@ -82,6 +78,7 @@ class Calendar {
             while (counter < endIndex) {
                 const newBlankDay = document.createElement("div");
                 newBlankDay.innerHTML = `<div class="calendar-day"></div>`;
+                newBlankDay.style.visibility = "hidden";
                 this.element.append(newBlankDay);
                 counter++;
             }
@@ -104,7 +101,6 @@ class Calendar {
     addToDom() {
         Calendar.calendarContainer.textContent = "";
         Calendar.calendarContainer.append(this.titleHTML());
-        Calendar.calendarContainer.append(Calendar.headerHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
     }
     
@@ -115,8 +111,8 @@ class Calendar {
             return;
         }
         if (event.target.innerText === "Edit") {
-            Calendar.calendarForm.style.visibility = "visible";
-            document.getElementById("calendar-form-to-hide").style.visibility = "hidden";
+            Calendar.calendarForm.style.display = "block";
+            document.getElementById("calendar-form-to-hide").style.display = "none";
             const button = document.getElementById("create");
             button.value = "Submit Changes";
             return;

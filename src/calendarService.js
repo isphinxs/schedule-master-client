@@ -25,7 +25,7 @@ class CalendarService {
         .then(calendar => {
             const c = new Calendar(calendar);
             c.addToDom();
-            Calendar.calendarForm.style.visibility = "hidden";
+            Calendar.calendarForm.style.display = "none";
         })
     }
     
@@ -55,7 +55,7 @@ class CalendarService {
             // reset form
             const button = document.getElementById("create");
             button.value = "Submit";    
-            Calendar.calendarForm.style.visibility = "hidden";
+            Calendar.calendarForm.style.display = "none";
             
             alert("Updated!");
         })
@@ -71,8 +71,8 @@ class CalendarService {
         })
         .then(resp => resp.json())
         .then(json => {
-            Calendar.calendarForm.style.visibility = "visible";
-            document.getElementById("calendar-form-to-hide").style.visibility = "visible";
+            Calendar.calendarForm.style.display = "block";
+            document.getElementById("calendar-form-to-hide").style.display = "block";
             Calendar.calendarContainer.innerHTML = "";
             Note.noteContainer.innerHTML = "";
             alert(json.message);

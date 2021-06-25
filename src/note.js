@@ -33,7 +33,7 @@ class Note {
         this.element.innerHTML = `
             <div id="note-${id}">
                 <ul></ul>
-                <button data-id="${id}" id="note-button-${id}">+</button>
+                <button data-id="${id}" class="note-button" id="note-button-${id}">+</button>
             </div>
         `;
 
