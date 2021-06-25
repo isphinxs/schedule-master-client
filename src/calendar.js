@@ -57,7 +57,13 @@ class Calendar {
     titleHTML() {
         const title = document.createElement("h3");
         title.id = "calendar-title";
-        title.innerHTML = `${this.title}: ${Day.months[this.start_month - 1]}, ${this.start_year} - ${Day.months[this.end_month - 1]}, ${this.end_year}`;
+        const start = `${Day.months[this.start_month - 1]}, ${this.start_year}`;
+        const end = `${Day.months[this.end_month - 1]}, ${this.end_year}`
+        if (start === end) {
+            title.innerHTML = `${this.title}: ${start}`;
+        } else {
+            title.innerHTML = `${this.title}: ${start} - ${end}`;
+        }
         return title;
     }
     
