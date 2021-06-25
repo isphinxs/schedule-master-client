@@ -8,7 +8,7 @@ class Note {
                 <h3>Add a Note</h3>
                 <br>
                 <label>Active?</label> 
-                <input type="radio" name="active-button" id="active-yes" value="Y">
+                <input type="radio" name="active-button" id="active-yes" value="Y" checked>
                 <label for="active-yes">Y</label>
                 <input type="radio" name="active-button" id="active-no" value="N">
                 <label for="active-no">N</label>
