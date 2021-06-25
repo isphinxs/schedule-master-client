@@ -30,16 +30,16 @@ class CalendarService {
     }
     
     updateCalendar(id) {
-        debugger;
+        // debugger;
         const calendar = {
             id : id, 
             title: document.getElementById("title").value,
-            start_month: document.getElementById("start-month").value,
-            start_year: document.getElementById("start-year").value,
-            end_month: document.getElementById("end-month").value,
-            end_year: document.getElementById("end-year").value
+            // start_month: document.getElementById("start-month").value,
+            // start_year: document.getElementById("start-year").value,
+            // end_month: document.getElementById("end-month").value,
+            // end_year: document.getElementById("end-year").value
         }
-
+        
         fetch(`${this.endpoint}/calendars/${id}`, {
             method: "PATCH",
             headers: {
@@ -48,17 +48,18 @@ class CalendarService {
             body: JSON.stringify(calendar)
         })
         .then(resp => resp.json())
-        .then(json => {
-            alert("Updated!");
+        .then(calendar => {
+            const c = Calendar.all[0];
+            c.updateCalendar(calendar);
+            
+            // reset form
             const button = document.getElementById("create");
-            button.value = "Submit";
-            // const c = Calendar.all[0];
-
-            // Calendar.calendarContainer.innerHTML = "";
-            // Note.noteContainer.innerHTML = "";
-            // alert(json.message);
+            button.value = "Submit";    
+            Calendar.calendarForm.style.visibility = "hidden";
+            
+            alert("Updated!");
         })
-
+        
     }
 
     deleteCalendar(id) {
@@ -71,6 +72,7 @@ class CalendarService {
         .then(resp => resp.json())
         .then(json => {
             Calendar.calendarForm.style.visibility = "visible";
+            document.getElementById("calendar-form-to-hide").style.visibility = "visible";
             Calendar.calendarContainer.innerHTML = "";
             Note.noteContainer.innerHTML = "";
             alert(json.message);

@@ -22,14 +22,16 @@ class Calendar {
         Calendar.calendarForm.innerHTML += `
             <form id="new-calendar-form">
                 Title: <input type="text" id="title">
-                Starting Month: <select id="start-month">
-                    ${this.monthSelector}
-                </select>
-                Starting Year: <input type="text" id="start-year">
-                Ending Month: <select id="end-month">
-                    ${this.monthSelector}
-                </select>
-                Ending Year: <input type="text" id="end-year">
+                <div id="calendar-form-to-hide">
+                    Starting Month: <select id="start-month">
+                        ${this.monthSelector}
+                    </select>
+                    Starting Year: <input type="text" id="start-year">
+                    Ending Month: <select id="end-month">
+                        ${this.monthSelector}
+                    </select>
+                    Ending Year: <input type="text" id="end-year">
+                </div>
                 <input type="submit" id="create">
             </form>
         `
@@ -62,6 +64,7 @@ class Calendar {
     
     titleHTML() {
         const title = document.createElement("h3");
+        title.id = "calendar-title";
         title.innerHTML = `${this.title}: ${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
         return title;
     }
@@ -89,12 +92,12 @@ class Calendar {
             this.element.append(newDayHTML);
             noteService.createNote(day, this);
         });
-
+        
         this.element.innerHTML += `
-            <button id="calendar-delete-button">Start Over</button>
-            <button id="calendar-edit-button">Edit</button>
+        <button id="calendar-delete-button">Start Over</button>
+        <button id="calendar-edit-button">Edit</button>
         `
-
+        
         return this.element;
     }
     
@@ -104,7 +107,7 @@ class Calendar {
         Calendar.calendarContainer.append(Calendar.headerHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
     }
-
+    
     handleClick(event) {
         // debugger;
         if (event.target.innerText === "Start Over") {
@@ -113,6 +116,7 @@ class Calendar {
         }
         if (event.target.innerText === "Edit") {
             Calendar.calendarForm.style.visibility = "visible";
+            document.getElementById("calendar-form-to-hide").style.visibility = "hidden";
             const button = document.getElementById("create");
             button.value = "Submit Changes";
             return;
@@ -122,5 +126,18 @@ class Calendar {
             Note.renderForm(note_id);
             return;
         }
+    }
+    
+    updateCalendar(calendar) {
+        this.title = calendar.title;
+        const title = document.getElementById("calendar-title");
+        title.innerHTML = `${this.title}: ${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
+
+        // this.start_month = calendar.start_month;
+        // this.start_year = calendar.start_year;
+        // this.end_month = calendar.end_month;
+        // this.end_year = calendar.end_year;
+               
+        return this;
     }
 }
