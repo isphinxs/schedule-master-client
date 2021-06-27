@@ -2,9 +2,9 @@ class Note {
     static all = [];
     static noteContainer = document.getElementById("note-container");
 
-    static renderForm(note_id) {
+    static renderForm(calendar_id, day_id) {
         this.noteContainer.innerHTML += `
-            <form data-id="${note_id}" id="note-popup">
+            <form data-calendar_id="${calendar_id}" data-day_id="${day_id}" id="note-popup">
                 <h3>Add a Note</h3>
                 <br>
                 <label>Active?</label> 
@@ -29,16 +29,18 @@ class Note {
         this.calendar_id = calendar_id;
         this.day_id = day_id;
 
-        this.element = document.createElement("div");
-        this.element.innerHTML = `
-            <div id="note-${id}">
-                <ul></ul>
-                <button data-id="${id}" class="note-button" id="note-button-${id}">+</button>
-            </div>
-        `;
+        // this.element = document.createElement("div");
+        // this.element.innerHTML = `
+        //     <div id="note-${id}">
+        //         <ul></ul>
+        //         <button data-id="${id}" class="note-button" id="note-button-${id}">+</button>
+        //     </div>
+        // `;
 
-        const day = document.getElementById(`day-${this.day_id}`);
-        day.append(this.element);
+        // debugger;
+
+        // const day = document.getElementById(`day-${this.day_id}`);
+        // day.append(this.element);
 
         Note.all.push(this);
     }
@@ -46,8 +48,11 @@ class Note {
     static handleSubmit(event) {
         event.preventDefault(); 
         if (event.submitter.id === "update-button") {
-            const note_id = event.target.dataset.id;
-            noteService.updateNote(note_id);
+            const calendar_id = event.target.dataset.calendar_id;
+            const day_id = event.target.dataset.day_id;
+            // debugger;
+            noteService.createNote(calendar_id, day_id);
+            // noteService.updateNote(note_id);
             return;
         }
         if (event.submitter.id === "cancel-button") {
@@ -58,7 +63,7 @@ class Note {
 
     addToDom() {
         const day = document.getElementById(`day-${this.day_id}`);
-        const ul = document.getElementById(`note-${this.id}`).getElementsByTagName("ul")[0];
+        const ul = document.getElementById(`note-${this.day_id}`).getElementsByTagName("ul")[0];
         
         // debugger;
         

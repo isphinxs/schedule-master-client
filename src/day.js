@@ -24,6 +24,10 @@ class Day {
     dayHTML() {
         this.element.innerHTML += `
             <p>${this.monthName} ${this.day}</p>
+            <div id="note-${this.id}">
+                <ul></ul>
+                <button data-id="${this.id}" class="note-button" id="note-button-${this.id}">+</button>
+            </div>
         `
         return this.element;
     }

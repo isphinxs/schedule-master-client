@@ -107,7 +107,7 @@ class Calendar {
             });
             const newDayHTML = d.element.innerHTML === "" ? d.dayHTML() : d.element;
             this.element.append(newDayHTML);
-            // noteService.createNote(day, this);
+            // noteService.createNote(date, this);
         })
         
         this.element.innerHTML += `
@@ -138,8 +138,10 @@ class Calendar {
             return;
         }
         if (event.target.innerText === "+") {
-            const note_id = event.target.dataset.id;
-            Note.renderForm(note_id);
+            // debugger;
+            const calendar_id = event.path[3].dataset.id;
+            const day_id = event.target.dataset.id;
+            Note.renderForm(calendar_id, day_id);
             return;
         }
     }
