@@ -19,6 +19,10 @@ class Calendar {
     static weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     
     static renderForm() {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
         Calendar.calendarForm.innerHTML += `
             <form id="new-calendar-form">
                 <label for="title">Title:</label> 
@@ -29,14 +33,14 @@ class Calendar {
                         ${this.monthSelector}
                     </select>
                     <label for="start-year">Starting Year:</label> 
-                    <input type="text" id="start-year">
+                    <input type="text" id="start-year" value="${currentYear}">
                     <br>
                     <label for="end-month">Ending Month:</label> 
                     <select id="end-month">
                         ${this.monthSelector}
                     </select>
                     <label for="end-year">Ending Year:</label> 
-                    <input type="text" id="end-year">
+                    <input type="text" id="end-year" value="${currentYear}">
                 </div>
                 <input type="submit" id="create">
             </form>
