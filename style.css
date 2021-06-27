@@ -83,3 +83,11 @@ button:hover, input[type=submit]:hover {
 .note-button:hover {
     background-color: #5BC0BE;
 }
+
+#note-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: blue;
+}
