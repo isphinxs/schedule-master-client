@@ -21,17 +21,22 @@ class Calendar {
     static renderForm() {
         Calendar.calendarForm.innerHTML += `
             <form id="new-calendar-form">
-                Title: <input type="text" id="title">
+                <label for="title">Title:</label> 
+                <input type="text" id="title">
                 <div id="calendar-form-to-hide">
-                    Starting Month: <select id="start-month">
+                    <label for="start-month">Starting Month:</label> 
+                    <select id="start-month">
                         ${this.monthSelector}
                     </select>
-                    Starting Year: <input type="text" id="start-year">
+                    <label for="start-year">Starting Year:</label> 
+                    <input type="text" id="start-year">
                     <br>
-                    Ending Month: <select id="end-month">
+                    <label for="end-month">Ending Month:</label> 
+                    <select id="end-month">
                         ${this.monthSelector}
                     </select>
-                    Ending Year: <input type="text" id="end-year">
+                    <label for="end-year">Ending Year:</label> 
+                    <input type="text" id="end-year">
                 </div>
                 <input type="submit" id="create">
             </form>
