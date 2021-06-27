@@ -43,7 +43,7 @@ h1, h2, h3 {
 body {
     font-family: 'Slabo 27px', serif;
     background-color: #0073ff;;
-    color: #0B132B;
+    color: white;
     text-align: center;
 }
 
@@ -53,13 +53,15 @@ input, select {
     color: #0B132B;
     margin: 5px;
     font-size: 15px;
+    border: none;
+    padding: 0.5em;
 }
 
 button:not(.note-button), input[type=submit] {
     font-family: 'Raleway', sans-serif;
     font-size: 15px;
     color: white;
-    background-color: #1C2541;
+    background-color: #00238e;
     min-width: 200px;
     padding: 0.5em;
     border: none;
@@ -67,7 +69,7 @@ button:not(.note-button), input[type=submit] {
 }
 
 button:hover, input[type=submit]:hover {
-    background-color: #5BC0BE;
+    background-color: #4cacff;
 }
 
 .note-button {
@@ -76,4 +78,8 @@ button:hover, input[type=submit]:hover {
     background-color: #4cacff;
     color: white;
     border: none;
+}
+
+.note-button:hover {
+    background-color: #5BC0BE;
 }

@@ -15,7 +15,7 @@ function handleCalendarSubmit(event) {
     if (event.submitter.value !== "Submit Changes") {
         calendarService.createCalendar();
     } else {
-        const calendar_id = Calendar.calendarContainer.childNodes[2].dataset.id;
+        const calendar_id = Calendar.calendarContainer.childNodes[1].dataset.id;
         calendarService.updateCalendar(calendar_id);
     }
     event.target.reset();

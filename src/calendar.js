@@ -57,13 +57,7 @@ class Calendar {
     titleHTML() {
         const title = document.createElement("h3");
         title.id = "calendar-title";
-        const start = `${Day.months[this.start_month - 1]}, ${this.start_year}`;
-        const end = `${Day.months[this.end_month - 1]}, ${this.end_year}`
-        if (start === end) {
-            title.innerHTML = `${this.title}: ${start}`;
-        } else {
-            title.innerHTML = `${this.title}: ${start} - ${end}`;
-        }
+        title.innerHTML = this.titleText();
         return title;
     }
     
@@ -130,16 +124,29 @@ class Calendar {
         }
     }
     
+    titleText() {
+        let title = "";
+        const start = `${Day.months[this.start_month - 1]}, ${this.start_year}`;
+        const end = `${Day.months[this.end_month - 1]}, ${this.end_year}`
+        debugger;
+        if (start === end) {
+            title = `${this.title}: ${start}`;
+        } else {
+            title = `${this.title}: ${start} - ${end}`;
+        }
+        return title;
+    }
+
     updateCalendar(calendar) {
         this.title = calendar.title;
         const title = document.getElementById("calendar-title");
-        title.innerHTML = `${this.title}: ${Day.months[this.start_month]}, ${this.start_year} - ${Day.months[this.end_month]}, ${this.end_year}`;
-
+        title.innerHTML = this.titleText();
+        
         // this.start_month = calendar.start_month;
         // this.start_year = calendar.start_year;
         // this.end_month = calendar.end_month;
         // this.end_year = calendar.end_year;
-               
+        
         return this;
     }
 }
