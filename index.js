@@ -3,7 +3,7 @@ const calendarService = new CalendarService(baseUrl);
 const dayService = new DayService(baseUrl);
 const noteService = new NoteService(baseUrl);
 
-dayService.getDays();
+// dayService.getDays();
 
 Calendar.renderForm();
 Calendar.calendarForm.addEventListener("submit", handleCalendarSubmit);

@@ -4,13 +4,14 @@ class Day {
     static months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     constructor({ id, day, month, year, weekday }) {
+        // debugger;
         this.id = id;
         this.day = day;
         this.month = month;
         this.year = year; 
         this.weekday = weekday;
 
-        this.monthName = Day.months[month - 1];
+        this.monthName = Day.months[month];
 
         this.element = document.createElement("div");
         this.element.dataset.id = this.id;

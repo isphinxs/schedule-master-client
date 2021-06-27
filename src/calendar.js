@@ -75,29 +75,40 @@ class Calendar {
             this.element.innerHTML += `<div class="calendar-day header">${weekday}</div>`;
         })
         
-        // convert to scope methods
-        const startIndex = Day.all.findIndex(day => day.year === this.start_year && day.month === this.start_month);
-        const endIndex = Day.all.findIndex(day => day.year === this.end_year && day.month === (this.end_month + 1));
-        const days = Day.all.slice(startIndex, endIndex);
-        
-        const firstDay = days[0].weekday;
-        if (firstDay !== "Sunday") {
-            let counter = 0;
-            const endIndex = Calendar.weekdays.indexOf(firstDay);
-            while (counter < endIndex) {
+        const startDate = new Date(this.start_year, this.start_month - 1, 1);
+        const endDate = new Date(this.end_year, this.end_month, 0)
+
+        const dates = [startDate];
+        for (let day = 2; dates[dates.length - 1 ] < endDate; day++) {
+            dates.push(new Date(this.start_year, this.start_month - 1, day));
+        }
+
+        const firstDay = startDate.getDay();
+        if (firstDay !== 0) {
+            for (let counter = 0; counter < firstDay; counter++) {
                 const newBlankDay = document.createElement("div");
                 newBlankDay.innerHTML = `<div class="calendar-day"></div>`;
                 newBlankDay.style.visibility = "hidden";
                 this.element.append(newBlankDay);
-                counter++;
             }
         }
         
-        days.forEach(day => {
-            const newDayHTML = day.element.innerHTML === "" ? day.dayHTML() : day.element;
+        dates.forEach((date, index) => {
+            const currentDate = date.getDate();
+            const currentMonth = date.getMonth();
+            const currentYear = date.getFullYear();
+            const currentDay = date.getDay();
+            const d = new Day({ 
+                id: index, 
+                day: currentDate, 
+                month: currentMonth, 
+                year: currentYear, 
+                weekday: currentDay 
+            });
+            const newDayHTML = d.element.innerHTML === "" ? d.dayHTML() : d.element;
             this.element.append(newDayHTML);
-            noteService.createNote(day, this);
-        });
+            // noteService.createNote(day, this);
+        })
         
         this.element.innerHTML += `
         <button id="calendar-delete-button">Start Over</button>
