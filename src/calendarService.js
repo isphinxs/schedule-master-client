@@ -38,9 +38,13 @@ class CalendarService {
             fetch(`${this.endpoint}/calendars`, configObject)
             .then(resp => resp.json())
             .then(calendar => {
-                const c = new Calendar(calendar);
-                c.addToDom();
-                Calendar.calendarForm.style.display = "none";
+                if (calendar.message) {
+                    alert(calendar.message);
+                } else {
+                    const c = new Calendar(calendar);
+                    c.addToDom();
+                    Calendar.calendarForm.style.display = "none";
+                }
             })
         }
 

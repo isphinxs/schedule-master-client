@@ -128,7 +128,6 @@ class Calendar {
         let title = "";
         const start = `${Day.months[this.start_month - 1]}, ${this.start_year}`;
         const end = `${Day.months[this.end_month - 1]}, ${this.end_year}`
-        debugger;
         if (start === end) {
             title = `${this.title}: ${start}`;
         } else {
