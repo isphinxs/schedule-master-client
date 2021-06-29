@@ -39,6 +39,12 @@ class CalendarService {
             .then(resp => resp.json())
             .then(calendar => {
                 if (calendar.message) {
+                    // debugger;
+                    document.getElementById("title").value = calendar.values.title;
+                    document.getElementById("start-month").value = calendar.values.start_month;
+                    document.getElementById("start-year").value = calendar.values.start_year;
+                    document.getElementById("end-month").value = calendar.values.end_month;
+                    document.getElementById("end-year").value = calendar.values.end_year;
                     alert(calendar.message);
                 } else {
                     const c = new Calendar(calendar);
