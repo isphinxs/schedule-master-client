@@ -76,15 +76,19 @@ class CalendarService {
         })
         .then(resp => resp.json())
         .then(calendar => {
-            const c = Calendar.all[0];
-            c.updateCalendar(calendar);
-            
-            // reset form
-            const button = document.getElementById("create");
-            button.value = "Submit";    
-            Calendar.calendarForm.style.display = "none";
-            
-            alert("Updated!");
+            if (calendar.message) {
+                alert(calendar.message);
+            } else {
+                const c = Calendar.all[0];
+                c.updateCalendar(calendar);
+                
+                // reset form
+                const button = document.getElementById("create");
+                button.value = "Submit";    
+                Calendar.calendarForm.style.display = "none";
+                
+                alert("Updated!");
+            }
         })
         
     }
