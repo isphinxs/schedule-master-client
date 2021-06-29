@@ -29,19 +29,6 @@ class Note {
         this.calendar_id = calendar_id;
         this.day_id = day_id;
 
-        // this.element = document.createElement("div");
-        // this.element.innerHTML = `
-        //     <div id="note-${id}">
-        //         <ul></ul>
-        //         <button data-id="${id}" class="note-button" id="note-button-${id}">+</button>
-        //     </div>
-        // `;
-
-        // debugger;
-
-        // const day = document.getElementById(`day-${this.day_id}`);
-        // day.append(this.element);
-
         Note.all.push(this);
     }
     
