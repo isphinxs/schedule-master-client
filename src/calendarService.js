@@ -79,7 +79,7 @@ class CalendarService {
             if (calendar.message) {
                 alert(calendar.message);
             } else {
-                const c = Calendar.all[0];
+                const c = Calendar.all[0]; // fix this
                 c.updateCalendar(calendar);
                 
                 // reset form
@@ -107,6 +107,29 @@ class CalendarService {
             Calendar.calendarContainer.innerHTML = "";
             Note.noteContainer.innerHTML = "";
             alert(json.message);
+        })
+    }
+
+    index() {
+        fetch(`${this.endpoint}/calendars`)
+        .then(resp => resp.json())
+        .then(calendars => {
+            // debugger;
+            Calendar.renderIndex(calendars);
+        })
+    }
+
+    show(id) {
+        fetch(`${this.endpoint}/calendars/${id}`)
+        .then(resp => resp.json())
+        .then(calendar => {
+            // debugger;
+            let c = Calendar.all.find(c => c.id === calendar.id);
+            if (!c) {
+                c = new Calendar(calendar);
+            }
+            c.addToDom();
+            Calendar.calendarForm.style.display = "none";
         })
     }
 }

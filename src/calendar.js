@@ -2,6 +2,7 @@ class Calendar {
     static all = [];
     static calendarContainer = document.getElementById("calendar-container");
     static calendarForm = document.getElementById("calendar-form-container");
+    static calendarIndex = document.getElementById("calendar-index");
     static monthSelector = `
         <option value="1">January</option>
         <option value="2">February</option>
@@ -45,6 +46,30 @@ class Calendar {
                 <input type="submit" id="create">
             </form>
         `
+    }
+
+    static renderIndex(calendars) {
+        const div = document.createElement("div");
+        div.innerHTML += `
+        <h3>Other Calendars</h3>
+        `
+        calendars.forEach(calendar => {
+            div.innerHTML += `
+            <button class="calendar-button" data-id="${calendar.id}" id="calendar-button-${calendar.id}" enabled>${calendar.title}</button>
+            `
+        })
+        Calendar.calendarIndex.append(div);
+        Calendar.calendarIndex.addEventListener("click", this.handleIndexClick);
+    }
+
+    static handleIndexClick(event) {
+        // debugger;
+        calendarService.show(event.target.dataset.id);
+        const buttons = Calendar.calendarIndex.getElementsByClassName("calendar-button");
+        for (let button of buttons) {
+            button.disabled = false;
+        }
+        document.getElementById(`calendar-button-${event.target.dataset.id}`).disabled = true;
     }
 
     constructor({ id, title, start_month, start_year, end_month, end_year }) {
@@ -119,7 +144,7 @@ class Calendar {
     }
     
     addToDom() {
-        Calendar.calendarContainer.textContent = "";
+        Calendar.calendarContainer.innerHTML = "";
         Calendar.calendarContainer.append(this.titleHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
     }

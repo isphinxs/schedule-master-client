@@ -72,6 +72,10 @@ button:hover, input[type=submit]:hover {
     background-color: #4cacff;
 }
 
+button:disabled {
+    background-color: #4cacff;
+}
+
 .note-button {
     height: 20px;
     width: 20px;

@@ -5,6 +5,7 @@ const noteService = new NoteService(baseUrl);
 
 // dayService.getDays();
 
+calendarService.index();
 Calendar.renderForm();
 Calendar.calendarForm.addEventListener("submit", handleCalendarSubmit);
 Note.noteContainer.addEventListener("submit", handleNoteSubmit);
