@@ -106,6 +106,7 @@ class CalendarService {
             document.getElementById("calendar-form-to-hide").style.display = "block";
             Calendar.calendarContainer.innerHTML = "";
             Note.noteContainer.innerHTML = "";
+            document.getElementById(`calendar-button-${id}`).remove();
             alert(json.message);
         })
     }

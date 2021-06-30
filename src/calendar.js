@@ -49,6 +49,7 @@ class Calendar {
     }
 
     static renderIndex(calendars) {
+        Calendar.calendarIndex.innerHTML = "";
         const div = document.createElement("div");
         div.innerHTML += `
         <h3>Other Calendars</h3>
