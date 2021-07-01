@@ -170,8 +170,8 @@ class Calendar {
             document.getElementById("calendar-form-to-hide").style.display = "block";
             Calendar.calendarContainer.innerHTML = "";
             Note.noteContainer.innerHTML = "";
-            debugger;
             Calendar.resetButtons();
+            Calendar.renderIndex();
 
             alert("Calendar saved. Please create a new calendar.");
             return;
