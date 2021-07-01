@@ -75,6 +75,7 @@ class Calendar {
             const newButton = Calendar.indexButtons.find(calendar => calendar.values.id === calendar_id);
             newButton.disabled = true;
             Calendar.renderIndex();
+            window.scrollTo(0,0);
         }
     }
     
