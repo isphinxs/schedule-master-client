@@ -3,6 +3,7 @@ class Calendar {
     static calendarContainer = document.getElementById("calendar-container");
     static calendarForm = document.getElementById("calendar-form-container");
     static calendarIndex = document.getElementById("calendar-index");
+    static currentCalendarId;
     static monthSelector = `
         <option value="1">January</option>
         <option value="2">February</option>
@@ -18,6 +19,7 @@ class Calendar {
         <option value="12">December</option>
     `
     static weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    static indexButtons = [];
     
     static renderForm() {
         const currentDate = new Date();
@@ -48,15 +50,15 @@ class Calendar {
         `
     }
 
-    static renderIndex(calendars) {
+    static renderIndex() {
         Calendar.calendarIndex.innerHTML = "";
         const div = document.createElement("div");
         div.innerHTML += `
         <h3>Other Calendars</h3>
         `
-        calendars.forEach(calendar => {
+        Calendar.indexButtons.forEach(calendar => {
             div.innerHTML += `
-            <button class="calendar-button" data-id="${calendar.id}" id="calendar-button-${calendar.id}" enabled>${calendar.title}</button>
+            <button class="calendar-button" data-id="${calendar.values.id}" id="calendar-button-${calendar.values.id}" ${calendar.disabled ? "disabled" : "enabled"}>${calendar.values.title}</button>
             `
         })
         Calendar.calendarIndex.append(div);
@@ -64,13 +66,23 @@ class Calendar {
     }
 
     static handleIndexClick(event) {
-        // debugger;
-        calendarService.show(event.target.dataset.id);
-        const buttons = Calendar.calendarIndex.getElementsByClassName("calendar-button");
-        for (let button of buttons) {
-            button.disabled = false;
+        if (event.target.nodeName === "BUTTON") {
+            Calendar.resetButtons();
+            const calendar_id = parseInt(event.target.dataset.id);
+            Calendar.currentCalendarId = calendar_id;
+            calendarService.show(calendar_id);
+    
+            const newButton = Calendar.indexButtons.find(calendar => calendar.values.id === calendar_id);
+            newButton.disabled = true;
+            Calendar.renderIndex();
         }
-        document.getElementById(`calendar-button-${event.target.dataset.id}`).disabled = true;
+    }
+    
+    static resetButtons() {
+        if (this.currentCalendarId) {
+            const oldButton = Calendar.indexButtons.find(calendar => calendar.values.id === this.currentCalendarId);
+            oldButton.disabled = false;
+        }
     }
 
     constructor({ id, title, start_month, start_year, end_month, end_year }) {
@@ -137,7 +149,8 @@ class Calendar {
         })
         
         this.element.innerHTML += `
-        <button id="calendar-delete-button">Start Over</button>
+        <button id="calendar-new-button">New</button>
+        <button id="calendar-delete-button">Delete</button>
         <button id="calendar-edit-button">Edit</button>
         `
         
@@ -152,7 +165,18 @@ class Calendar {
     
     handleClick(event) {
         // debugger;
-        if (event.target.innerText === "Start Over") {
+        if (event.target.innerText === "New") {
+            Calendar.calendarForm.style.display = "block";
+            document.getElementById("calendar-form-to-hide").style.display = "block";
+            Calendar.calendarContainer.innerHTML = "";
+            Note.noteContainer.innerHTML = "";
+            debugger;
+            Calendar.resetButtons();
+
+            alert("Calendar saved. Please create a new calendar.");
+            return;
+        }
+        if (event.target.innerText === "Delete") {
             calendarService.deleteCalendar(this.dataset.id);
             return;
         }

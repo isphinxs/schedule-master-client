@@ -48,12 +48,15 @@ class CalendarService {
                     alert(calendar.message);
                 } else {
                     const c = new Calendar(calendar);
+                    Calendar.indexButtons.push({ values: c, disabled: true });
                     c.addToDom();
                     Calendar.calendarForm.style.display = "none";
+                    Calendar.currentCalendarId = c.id;
+                    Calendar.renderIndex(Calendar.indexButtons);
                 }
             })
         }
-
+        
     }
     
     updateCalendar(id) {
@@ -79,8 +82,9 @@ class CalendarService {
             if (calendar.message) {
                 alert(calendar.message);
             } else {
-                const c = Calendar.all[0]; // fix this
+                const c = Calendar.all.find(c => c.id === calendar.id);
                 c.updateCalendar(calendar);
+                document.getElementById(`calendar-button-${c.id}`).innerHTML = c.title;
                 
                 // reset form
                 const button = document.getElementById("create");
@@ -115,22 +119,20 @@ class CalendarService {
         fetch(`${this.endpoint}/calendars`)
         .then(resp => resp.json())
         .then(calendars => {
-            // debugger;
-            Calendar.renderIndex(calendars);
+            calendars.forEach(calendar => {
+                Calendar.indexButtons.push({ values: calendar, disabled: false });
+            })
+            Calendar.renderIndex();
         })
     }
 
     show(id) {
-        fetch(`${this.endpoint}/calendars/${id}`)
-        .then(resp => resp.json())
-        .then(calendar => {
-            // debugger;
-            let c = Calendar.all.find(c => c.id === calendar.id);
-            if (!c) {
-                c = new Calendar(calendar);
-            }
-            c.addToDom();
-            Calendar.calendarForm.style.display = "none";
-        })
+        const calendar = Calendar.indexButtons.find(c => c.values.id === id).values;
+        let newCalendar = Calendar.all.find(calendar => calendar.id === id);
+        if (!newCalendar) {
+            newCalendar = new Calendar(calendar);
+        }
+        newCalendar.addToDom();
+        Calendar.calendarForm.style.display = "none";
     }
 }
