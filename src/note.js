@@ -22,12 +22,12 @@ class Note {
         `
     }
 
-    constructor({id, content, is_active, calendar_id, day_id}) {
+    constructor({id, content, is_active, calendar_id, day}) {
         this.id = id;
         this.content = content;
         this.is_active = is_active;
         this.calendar_id = calendar_id;
-        this.day_id = day_id;
+        this.day_id = day;
 
         Note.all.push(this);
     }

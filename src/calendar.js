@@ -93,6 +93,7 @@ class Calendar {
         this.start_year = start_year;
         this.end_month = end_month;
         this.end_year = end_year;
+        this.notes = [];
         
         this.element = document.createElement("div");
         this.element.dataset.id = this.id;
@@ -162,6 +163,12 @@ class Calendar {
         Calendar.calendarContainer.innerHTML = "";
         Calendar.calendarContainer.append(this.titleHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
+
+        if (this.notes.length > 0) {
+            this.notes.forEach(note => {
+                note.addToDom();
+            })
+        }
     }
     
     handleClick(event) {

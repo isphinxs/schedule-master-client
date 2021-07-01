@@ -4,11 +4,13 @@ class NoteService {
     }
     
     createNote(calendar_id, day_id) {
+        const calendar = Calendar.all.find(c => c.id === parseInt(calendar_id));
+
         const note = {
             content: document.getElementById("content").value,
             is_active: this.is_active(), 
-            calendar_id: calendar_id,
-            day_id: day_id
+            calendar_id: parseInt(calendar_id),
+            day: parseInt(day_id)
         }
         
         const configObject = {
@@ -25,6 +27,7 @@ class NoteService {
         .then(resp => resp.json())
         .then(note => {
             const n = new Note(note);
+            calendar.notes.push(n);
             n.addToDom();
             Note.noteContainer.innerHTML = "";
         })
