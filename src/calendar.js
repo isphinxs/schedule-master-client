@@ -116,51 +116,52 @@ class Calendar {
     }
     
     calendarHTML() {
-        Calendar.weekdays.forEach(weekday => {
-            this.element.innerHTML += `<div class="calendar-day header">${weekday}</div>`;
-        })
-        
-        const startDate = new Date(this.start_year, this.start_month - 1, 1);
-        const endDate = new Date(this.end_year, this.end_month, 0)
-
-        const dates = [startDate];
-        for (let day = 2; dates[dates.length - 1 ] < endDate; day++) {
-            dates.push(new Date(this.start_year, this.start_month - 1, day));
-        }
-
-        const firstDay = startDate.getDay();
-        if (firstDay !== 0) {
-            for (let counter = 0; counter < firstDay; counter++) {
-                const newBlankDay = document.createElement("div");
-                newBlankDay.innerHTML = `<div class="calendar-day"></div>`;
-                newBlankDay.style.visibility = "hidden";
-                this.element.append(newBlankDay);
+        if (this.element.innerText === "") {
+            Calendar.weekdays.forEach(weekday => {
+                this.element.innerHTML += `<div class="calendar-day header">${weekday}</div>`;
+            })
+            
+            const startDate = new Date(this.start_year, this.start_month - 1, 1);
+            const endDate = new Date(this.end_year, this.end_month, 0)
+    
+            const dates = [startDate];
+            for (let day = 2; dates[dates.length - 1 ] < endDate; day++) {
+                dates.push(new Date(this.start_year, this.start_month - 1, day));
             }
+    
+            const firstDay = startDate.getDay();
+            if (firstDay !== 0) {
+                for (let counter = 0; counter < firstDay; counter++) {
+                    const newBlankDay = document.createElement("div");
+                    newBlankDay.innerHTML = `<div class="calendar-day"></div>`;
+                    newBlankDay.style.visibility = "hidden";
+                    this.element.append(newBlankDay);
+                }
+            }
+            
+            dates.forEach((date, index) => {
+                const currentDate = date.getDate();
+                const currentMonth = date.getMonth();
+                const currentYear = date.getFullYear();
+                const currentDay = date.getDay();
+                const d = new Day({ 
+                    id: index, 
+                    day: currentDate, 
+                    month: currentMonth, 
+                    year: currentYear, 
+                    weekday: currentDay 
+                });
+                const newDayHTML = d.element.innerHTML === "" ? d.dayHTML() : d.element;
+                this.element.append(newDayHTML);
+                // noteService.createNote(date, this);
+            })
+            
+            this.element.innerHTML += `
+            <button id="calendar-new-button">New</button>
+            <button id="calendar-delete-button">Delete</button>
+            <button id="calendar-edit-button">Edit</button>
+            `
         }
-        
-        dates.forEach((date, index) => {
-            const currentDate = date.getDate();
-            const currentMonth = date.getMonth();
-            const currentYear = date.getFullYear();
-            const currentDay = date.getDay();
-            const d = new Day({ 
-                id: index, 
-                day: currentDate, 
-                month: currentMonth, 
-                year: currentYear, 
-                weekday: currentDay 
-            });
-            const newDayHTML = d.element.innerHTML === "" ? d.dayHTML() : d.element;
-            this.element.append(newDayHTML);
-            // noteService.createNote(date, this);
-        })
-        
-        this.element.innerHTML += `
-        <button id="calendar-new-button">New</button>
-        <button id="calendar-delete-button">Delete</button>
-        <button id="calendar-edit-button">Edit</button>
-        `
-        
         return this.element;
     }
     
