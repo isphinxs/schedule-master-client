@@ -40,7 +40,7 @@ li {
 
 /*  Fonts  */
 
-h1, h2, h3 {
+h1, h2, h3, a {
     font-family: 'Raleway', sans-serif;
     color: #84fffa;
 }
@@ -60,6 +60,10 @@ input, select {
     font-size: 15px;
     border: none;
     padding: 0.5em;
+}
+
+a:link {
+    text-decoration: none;
 }
 
 button:not(.note-button), input[type=submit] {
