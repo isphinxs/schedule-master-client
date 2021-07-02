@@ -94,11 +94,12 @@ class Calendar {
         this.start_year = start_year;
         this.end_month = end_month;
         this.end_year = end_year;
+        this.rendered = false;
 
-        if (notes.length > 0) {
-            this.notes = notes.map(note => new Note(note));
-        } else {
+        if (!notes) {
             this.notes = [];
+        } else {
+            this.notes = notes.map(note => new Note(note));
         }
 
         this.element = document.createElement("div");
@@ -154,7 +155,6 @@ class Calendar {
                 });
                 const newDayHTML = d.element.innerHTML === "" ? d.dayHTML() : d.element;
                 this.element.append(newDayHTML);
-                // noteService.createNote(date, this);
             })
             
             this.element.innerHTML += `
@@ -165,16 +165,17 @@ class Calendar {
         }
         return this.element;
     }
-    
+        
     addToDom() {
         Calendar.calendarContainer.innerHTML = "";
         Calendar.calendarContainer.append(this.titleHTML());
         Calendar.calendarContainer.append(this.calendarHTML());
-
-        if (this.notes.length > 0) {
-            this.notes.forEach(note => {
-                note.addToDom();
-            })
+        
+        if (!this.rendered) {
+            if (this.notes.length > 0) {
+                this.notes.forEach(note => note.addToDom());
+            }
+            this.rendered = true;
         }
     }
     
