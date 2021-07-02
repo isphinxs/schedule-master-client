@@ -27,6 +27,7 @@ class Calendar {
         const currentYear = currentDate.getFullYear();
 
         Calendar.calendarForm.innerHTML += `
+            <p>Create a new calendar, or choose from the existing calendars below.</p>
             <form id="new-calendar-form">
                 <label for="title">Title:</label> 
                 <input type="text" id="title">
