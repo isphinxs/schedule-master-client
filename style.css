@@ -30,7 +30,12 @@ div.calendar-day {
 
 ul {
     list-style-type: none;
-    display: table;
+    display: inline;
+    padding: 0;
+}
+
+li {
+    margin: 10px;
 }
 
 /*  Fonts  */
