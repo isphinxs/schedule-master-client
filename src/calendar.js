@@ -86,15 +86,20 @@ class Calendar {
         }
     }
 
-    constructor({ id, title, start_month, start_year, end_month, end_year }) {
+    constructor({ id, title, start_month, start_year, end_month, end_year, notes }) {
         this.id = id;
         this.title = title;
         this.start_month = start_month;
         this.start_year = start_year;
         this.end_month = end_month;
         this.end_year = end_year;
-        this.notes = [];
-        
+
+        if (notes.length > 0) {
+            this.notes = notes.map(note => new Note(note));
+        } else {
+            this.notes = [];
+        }
+
         this.element = document.createElement("div");
         this.element.dataset.id = this.id;
         this.element.id = `calendar-${this.id}`;
