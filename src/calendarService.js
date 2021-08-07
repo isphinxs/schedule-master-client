@@ -106,6 +106,7 @@ class CalendarService {
         })
         .then(resp => resp.json())
         .then(json => {
+            // Calendar.deleteCalendar(id);
             Calendar.calendarForm.style.display = "block";
             document.getElementById("calendar-form-to-hide").style.display = "block";
             Calendar.calendarContainer.innerHTML = "";

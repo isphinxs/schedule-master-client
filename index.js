@@ -10,6 +10,30 @@ Calendar.renderForm();
 Calendar.calendarForm.addEventListener("submit", handleCalendarSubmit);
 Note.noteContainer.addEventListener("submit", handleNoteSubmit);
 
+// search feature
+document.getElementById("search").addEventListener("keyup", (event) => {
+    // debugger;
+    const searchValue = document.getElementById("search-value").value;
+    const newIndexButtons = Calendar.indexButtons.filter(button => {
+        // debugger;
+        return button.values.title.toLowerCase().includes(searchValue.toLowerCase());
+        // button.value.includes(searchValue)
+    });
+    
+    Calendar.calendarIndex.innerHTML = "";
+    const div = document.createElement("div");
+    
+    newIndexButtons.forEach(calendar => {
+        div.innerHTML += `
+        <button class="calendar-button" data-id="${calendar.values.id}" id="calendar-button-${calendar.values.id}" ${calendar.disabled ? "disabled" : "enabled"}>${calendar.values.title}</button>
+        `
+    })
+    Calendar.calendarIndex.append(div);
+    // Calendar.calendarIndex.addEventListener("click", this.handleIndexClick);
+
+    // debugger;
+})
+
 function handleCalendarSubmit(event) {
     // debugger;
     event.preventDefault();

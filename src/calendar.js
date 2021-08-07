@@ -54,9 +54,7 @@ class Calendar {
     static renderIndex() {
         Calendar.calendarIndex.innerHTML = "";
         const div = document.createElement("div");
-        div.innerHTML += `
-        <h3>Other Calendars</h3>
-        `
+        
         Calendar.indexButtons.forEach(calendar => {
             div.innerHTML += `
             <button class="calendar-button" data-id="${calendar.values.id}" id="calendar-button-${calendar.values.id}" ${calendar.disabled ? "disabled" : "enabled"}>${calendar.values.title}</button>
@@ -77,6 +75,7 @@ class Calendar {
             newButton.disabled = true;
             Calendar.renderIndex();
             window.scrollTo(0,0);
+            document.getElementById("search-value").value = "";
         }
     }
     
@@ -86,6 +85,12 @@ class Calendar {
             oldButton.disabled = false;
         }
     }
+
+    // static deleteCalendar(id) {
+    //     debugger;
+    //     const index = Calendar.all.findIndex(calendar => calendar.id === id);
+    //     Calendar.all.splice([index], 1);
+    // }
 
     constructor({ id, title, start_month, start_year, end_month, end_year, notes }) {
         this.id = id;
@@ -205,7 +210,7 @@ class Calendar {
         }
         if (event.target.innerText === "+") {
             // debugger;
-            const calendar_id = event.path[3].dataset.id;
+            const calendar_id = event.currentTarget.dataset.id;
             const day_id = event.target.dataset.id;
             Note.renderForm(calendar_id, day_id);
             return;
